@@ -116,10 +116,10 @@
                             </div>
 
                             @*<div class="col-md-4">
-                                <label asp-for="Password" class="control-label"></label>
-                                <input asp-for="Password" class="form-control" placeholder="Jon" type="text">
-                            <span asp-validation-for="Password"></span>
-                            </div>*@
+                                    <label asp-for="Password" class="control-label"></label>
+                                    <input asp-for="Password" class="form-control" placeholder="Jon" type="text">
+                                <span asp-validation-for="Password"></span>
+                                </div>*@
 
                         </div>
                     </div>
@@ -200,13 +200,13 @@
 
                     <div class="form-group">
                         <div class="row">
+                            @*<div class="col-md-offset-2 col-md-4">
+                                    <label asp-for="Usuario" class="control-label"></label>
+                                    <input asp-for="Usuario" class="form-control" type="text">
+                                </div>*@
+
+
                             <div class="col-md-offset-2 col-md-4">
-                                <label asp-for="Usuario" class="control-label"></label>
-                                <input asp-for="Usuario" class="form-control" type="text">
-                            </div>
-
-
-                            <div class="col-md-4">
                                 <label class="control-label" asp-for="IdTipoPersona"></label>
 
                                 <select asp-for="IdTipoPersona" class="form-control">
@@ -227,15 +227,7 @@
                         <div class="row">
                             <div class="col-md-offset-2 col-md-4">
                                 <label asp-for="Pais" class="control-label"></label>
-                                @*<select asp-for="Pais" class="form-control">
-
-                                        @foreach (var item in Model.Paises)
-                                        {
-                                            <option value="@item.Valor">@item.Nombre</option>
-
-                                        }
-                                    </select>*@
-
+                             
                                 <select asp-for="Pais" class="form-control">
                                     <option value="AF">Afghanistan</option>
                                     <option value="AX">Åland Islands</option>
@@ -489,6 +481,16 @@
                                 </select>
                                 <span asp-validation-for="Pais"></span>
                             </div>
+
+                            <div class="col-md-4">                                
+                                <label asp-for="CarreraSeleccionada" class="control-label"></label>
+                                <select asp-for="Carreras" class="form-control">
+                                    @foreach (var item in Model.Carreras) { 
+                                   
+                                        <option value="@item.IdCarrera">@item.NombreCarrera</option>
+                                    }</select>
+                            </div>
+
                         </div>
                     </div>
                 </fieldset>

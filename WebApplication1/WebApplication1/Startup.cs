@@ -53,6 +53,7 @@ namespace WebApplication1
 
                 // User settings
                 options.User.RequireUniqueEmail = true;
+                
             });
 
 
@@ -81,7 +82,7 @@ namespace WebApplication1
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Cursos}/{action=Create}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

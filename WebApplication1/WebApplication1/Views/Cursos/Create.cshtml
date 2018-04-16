@@ -43,8 +43,8 @@
 							<li><a asp-controller="Cursos" asp-action="Create">Agregar</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a asp-controller="Cursos" asp-action="Edit">Editar</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a asp-controller="Cursos" asp-action="Delete">Eliminar</a></li>
+							@*<li role="separator" class="divider"></li>
+							<li><a asp-controller="Cursos" asp-action="Delete">Eliminar</a></li>*@
 
 						</ul>
 					</li>
@@ -111,9 +111,9 @@
 					<div class="form-group">
 						<div class="row">
 							<div class="col-md-4">
-								<label class="control-label" asp-for="CarrerasList"></label>
+								<label class="control-label" asp-for="CarreraId"></label>
 
-								<select asp-for="CarrerasList" class="form-control">
+								<select asp-for="CarreraId" class="form-control">
 
 										@foreach (var item in Model.CarrerasList)
 											{
@@ -121,7 +121,7 @@
 											}
 									</select>
 
-								<span asp-validation-for="CarrerasList"></span>
+								<span asp-validation-for="CarreraId"></span>
 							</div>
 							<div class="col-md-4">
 								<label asp-for="IdCurso" class="control-label"></label>

@@ -16,7 +16,7 @@ namespace WebApplication1.Models.RegistroViewModels
         //public string Password { get; set; }
 
         [Display(Name = "Cedula")]
-        [StringLength(50)]
+        [StringLength(9, ErrorMessage = "Longitud debe ser de 9 caracteres")]
         public string IdPersona { get; set; }
 
         [Required]
@@ -33,13 +33,14 @@ namespace WebApplication1.Models.RegistroViewModels
         [StringLength(50)]
         public string Apellido2 { get; set; }
 
-        [Required]
-        public string Usuario { get; set; }
+        //[Required]
+        //public string Usuario { get; set; }
 
         [Required]
         [StringLength(50)]
         [EmailAddress]
         public string Correo { get; set; }
+
 
         //[Required]
         //[StringLength(50)]
@@ -51,7 +52,6 @@ namespace WebApplication1.Models.RegistroViewModels
 
         public ICollection<Pais> Paises { get; set; }
 
-
         public string Ciudad { get; set; }
 
         [Required]
@@ -61,10 +61,13 @@ namespace WebApplication1.Models.RegistroViewModels
         [StringLength(50)]
         public string IdTipoPersona { get; set; }
 
+        [Display(Name = "Carrera")]
+        public string CarreraSeleccionada { get; set; }
 
         [Display(Name = "Tipo Persona")]
         public ICollection<TipoPersona> Tipos { get; set; }
 
+        public ICollection<Carreras> Carreras { get; set; }
 
         [Required]
         public string Genero { get; set; }

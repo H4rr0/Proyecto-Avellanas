@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,8 +11,13 @@ namespace WebApplication1.Models.RegistroViewModels
     {
 
         [Display(Name = "Cedula")]
-        [StringLength(50)]
+        [StringLength(50)] 
         public string IdPersona { get; set; }
+
+
+        [Display(Name = "Identificacion")]
+        [StringLength(50)]
+        public string IdPersona2 { get; set; }
 
         [Required]
         [StringLength(50)]

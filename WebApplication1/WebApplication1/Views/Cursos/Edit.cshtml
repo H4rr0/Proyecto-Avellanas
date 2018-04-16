@@ -57,17 +57,25 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a href="Curso.html">Agregar</a>
-                            </li>
+
+
+                            <li><a asp-controller="Cursos" asp-action="Create">Agregar</a></li>
                             <li role="separator" class="divider"></li>
-                            <li>
-                                <a href="#">Editar</a>
-                            </li>
-                            <li role="separator" class="divider"></li>
-                            <li>
-                                <a href="Eliminar_Curso.html">Eliminar</a>
-                            </li>
+                            <li><a asp-controller="Cursos" asp-action="Edit">Editar</a></li>
+                            @*<li role="separator" class="divider"></li>
+                                <li><a asp-controller="Registro" asp-action="Delete">Eliminar</a></li>*@
+
+                            @*<li>
+                                    <a href="Curso.html">Agregar</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a href="#">Editar</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a href="Eliminar_Curso.html">Eliminar</a>
+                                </li>*@
 
                         </ul>
                     </li>
@@ -131,44 +139,46 @@
 
         <div class="container">
             <fieldset>
-				<form asp-controller="Curso" asp-action="Search" method="post">
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-4">
-								<label class="control-label" asp-for="Carreras"></label>
-								<select asp-for="Carreras" class="form-control">
+                <form asp-controller="Cursos" asp-action="Search" method="post">
+                    @*<div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="control-label" asp-for="Carreras"></label>
+                                    <select asp-for="Carreras" class="form-control">
 
-									@foreach (var item in Model.Carreras)
-										{
-										   <option value="@item.IdCarrera">@item.NombreCarrera</option>
-										}
-								</select>
-								<span asp-validation-for="Carreras"></span>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-offset-2 col-md-4">
-								<label asp-for="IdCurso" class="control-label"></label>
-								<input asp-for="IdCurso" class="form-control">
-							</div>
+                                        @foreach (var item in Model.Carreras)
+                                            {
+                                               <option value="@item.IdCarrera">@item.NombreCarrera</option>
+                                            }
+                                    </select>
+                                    <span asp-validation-for="Carreras"></span>
+                                </div>
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-offset-2 col-md-4">
+                                <label asp-for="IdCurso" class="control-label"></label>
+                                <input asp-for="IdCurso" class="form-control">
+                            </div>
 
-							<div class="col-md-3">
-								<button type="submit" class="btn btn-dark btn-lg btn_registrar">
-									Buscar
-									<span class="fa fa-search" aria-hidden="true"></span>
-								</button>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-dark btn-lg btn_registrar">
+                                    Buscar
+                                    <span class="fa fa-search" aria-hidden="true"></span>
+                                </button>
 
-							</div>
-						</div>
-					</div>
+                            </div>
+                        </div>
+                    </div>
 
 
 
-				</form>
+                </form>
 
-                <form method="post">
+
+
+                <form asp-controller="Cursos" asp-action="Edit" method="post">
 
                     <div class="form-group">
                         <div class="row">
@@ -177,42 +187,50 @@
                                 <input asp-for="Descripcion" class="form-control" placeholder="Jon" type="text">
                             </div>
 
+                            <div class=" col-md-4">
+                                <label asp-for="IdCurso2" class="control-label" for="nome"></label>
+                                <input asp-for="IdCurso2" class="form-control" placeholder="Jon" type="text">
+                            </div>
+
+
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="row">
-                          <div class="col-md-offset-2 col-md-4">
-                                    <label asp-for="Creditos" class="control-label"></label>
-                                    <div class="input-group">
-                                        <input asp-for="Creditos" class="form-control" type="number" required="true">
-                                    </div>
+                            <div class="col-md-offset-2 col-md-4">
+                                <label asp-for="Creditos" class="control-label"></label>
+                                <div class="input-group">
+                                    <input asp-for="Creditos" class="form-control" type="number" required="true">
                                 </div>
                             </div>
-						 <div class="col-md-offset-2 col-md-4">
-                                    <label asp-for="Precio" class="control-label"></label>
-                                    <div class="input-group">
-                                        <input asp-for="Precio" class="form-control" type="number" required="true">
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="col-md-offset-2 col-md-4">
+                            <label asp-for="Precio" class="control-label"></label>
+                            <div class="input-group">
+                                <input asp-for="Precio" class="form-control" type="number" required="true">
                             </div>
-                    
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-offset-2 col-md-4">
+                                <button type="submit" class="btn btn-dark btn-lg btn_registrar">
+                                    Guardar
+                                    <span class="fa fa-save" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
 
                 </form>
 
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-offset-2 col-md-4">
-                            <button type="submit" class="btn btn-dark btn-lg btn_registrar">
-                                Guardar
-                                <span class="fa fa-save" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
 
             </fieldset>
         </div>
 
-       </section>
+    </section>
 </body>

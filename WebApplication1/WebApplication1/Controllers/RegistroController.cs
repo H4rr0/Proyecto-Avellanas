@@ -15,7 +15,7 @@ using WebApplication1.Services;
 
 namespace WebApplication1.Controllers
 {
-   // [Authorize]
+    [Authorize]
     public class RegistroController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -49,25 +49,56 @@ namespace WebApplication1.Controllers
         {
             CrearViewModel modelo = new CrearViewModel();
             var tipos = (from c in _context.TipoPersona select c).ToList();
+            var carne = (from ca in _context.Secuencias where ca.Descripcion == "Carnet" select ca).ToList();
+            var carreras = (from c in _context.Carreras select c).ToList();
+            var carne_valor = 0;
+            foreach (var item in carne)
+            {
+                carne_valor = int.Parse(item.Value.ToString());
+            }
 
-            modelo.Carnet = "201601235";
+            modelo.Carnet = "2018" + carne_valor;
             modelo.Tipos = tipos;
+            modelo.Carreras = carreras;
 
             return View(modelo);
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(CrearViewModel modelo)
         {
 
             var tipos = (from c in _context.TipoPersona select c).ToList();
 
-            modelo.Carnet = "201601235";
+
+
+            var consulta_secuencia_carne = (from ca in _context.Secuencias where ca.Descripcion == "Carnet" select ca);
+            var carne = (from ca in _context.Secuencias where ca.Descripcion == "Carnet" select ca).ToList();
+            var carne_valor = 0;
+
+            foreach (var item in carne)
+            {
+                carne_valor = int.Parse(item.Value.ToString());
+            }
+
+            modelo.Carnet = "2018" + carne_valor;
+
             modelo.Tipos = tipos;
 
             if (ModelState.IsValid)
             {
+                if (modelo.IdPersona.Length < 9)
+                {
+                    return View(modelo);
+                }
+                if ((from p in _context.Persona where p.Cedula == modelo.IdPersona select p).ToList().Count > 0)
+                {
+                    return View("Error");
+                }             
+                
                 int persona = (from p in _context.Persona
-                               where p.Cedula == modelo.IdPersona select p).Count();
+                               where p.Cedula == modelo.IdPersona
+                               select p).Count();
 
                 if (persona <= 0)
                 {
@@ -75,8 +106,28 @@ namespace WebApplication1.Controllers
                     {
                         //var password = "1234567qQwc4";
 
-
                         string pass = "1234567qQ";
+                        List<Carreras> carrera = new List<Carreras>();
+
+                        if (modelo.IdTipoPersona == "1")
+                        {
+
+                            var consulta_carrera = (from car in _context.Carreras where car.IdCarrera == modelo.CarreraSeleccionada select car).FirstOrDefault();
+
+                            carrera.Add(new Carreras
+                            {
+                                IdCarrera = "CAR_EST" + (from seq in _context.Secuencias
+                                                         where seq.Descripcion == "CAR_EST"
+                                                         select seq.Value).FirstOrDefault(),
+                                NombreCarrera = consulta_carrera.NombreCarrera,
+                                IdPersona = modelo.IdPersona
+                            });
+
+                        }
+                        else
+                        {
+                            carrera = null;
+                        }
 
 
                         var user = new ApplicationUser
@@ -91,15 +142,11 @@ namespace WebApplication1.Controllers
                             Pais = modelo.Pais,
                             Ciudad = modelo.Ciudad,
                             Password = pass,
-                            Cedula = modelo.IdPersona
-
+                            Cedula = modelo.IdPersona,
+                            Carreras = carrera
                         };
 
                         var result = await _userManager.CreateAsync(user, pass);
-
-                        //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                        //var result = await _userManager.CreateAsync(user, model.Password);
-
 
                         if (result.Succeeded)
                         {
@@ -112,31 +159,16 @@ namespace WebApplication1.Controllers
                             await _signInManager.SignInAsync(user, isPersistent: false);
                             _logger.LogInformation("User created a new account with password.");
 
+                            //actualiza la tabla de secuencias 
+                            var secuencia = consulta_secuencia_carne.FirstOrDefault();
+
+                            secuencia.Value = secuencia.Value + 1;
+
                             _context.SaveChanges();
 
                             return RedirectToAction("Index", new Microsoft.AspNetCore.Routing.RouteValueDictionary(
                               new { controller = "Home", action = "Index" }));
                         }
-
-
-                        //_context.Persona.Add(new Models.ApplicationUser
-                        //{
-                        //    NombreCompleto = modelo.Nombre + " " + modelo.Apellido1 + " " + modelo.Apellido2,
-                        //    TipoPersonaId = modelo.IdTipoPersona,
-                        //    Correo = modelo.Correo,
-                        //    Genero = modelo.Genero,
-                        //    Carnet = modelo.Carnet,
-                        //    Pais = modelo.Pais,
-                        //    Ciudad = modelo.Ciudad,
-                        //    Password = password,
-                        //    Cedula = modelo.IdPersona
-
-                        //});
-
-                        //_context.SaveChanges();
-
-                        //return RedirectToAction("Index", new Microsoft.AspNetCore.Routing.RouteValueDictionary(
-                        //      new { controller = "Home", action = "Index" }));
                     }
 
                     return View(modelo);
@@ -144,10 +176,8 @@ namespace WebApplication1.Controllers
                 }
                 return View(modelo);
 
-
-
             }
-          
+
             return View(modelo);
         }
 
@@ -158,21 +188,21 @@ namespace WebApplication1.Controllers
             return View(modelo);
         }
 
-
-
+        //buscar para esditar
         [HttpPost]
         public IActionResult Search(EditarViewModel modelo)
         {
-            if (modelo.IdPersona != null)
+            if (modelo.IdPersona.Trim() != "" || (from p in _context.Persona where p.Cedula == modelo.IdPersona select p).ToList().Count > 0)
             {
                 var persona = (from p in _context.Persona
                                where p.Cedula == modelo.IdPersona
-                               select new Models.ApplicationUser
+                               select new ApplicationUser
                                {
                                    Pais = p.Pais,
                                    NombreCompleto = p.NombreCompleto,
                                    Correo = p.Correo,
-                                   Genero = p.Genero
+                                   Genero = p.Genero,
+                                   Cedula=p.Cedula
                                }).ToList();
 
                 if (persona.Count() == 0)
@@ -180,8 +210,6 @@ namespace WebApplication1.Controllers
                     return RedirectToAction("Error", new Microsoft.AspNetCore.Routing.RouteValueDictionary(
                   new { controller = "Home", action = "Error" }));
                 }
-
-
 
 
                 EditarViewModel modelo1 = new EditarViewModel();
@@ -216,25 +244,26 @@ namespace WebApplication1.Controllers
                     modelo1.Correo = item.Correo;
                     modelo1.Pais = item.Pais;
                     modelo1.Genero = genero;
-
+                    modelo1.IdPersona2 = item.Cedula;
                 }
 
 
                 return View("~/Views/Registro/Edit.cshtml", modelo1);
             }
 
-            return View(modelo);
+            return View("Error");
         }
-
+        //buscar para eliminar
         [HttpPost]
         public IActionResult Search1(DeleteViewModel modelo)
         {
-            if (modelo.IdPersona != null)
+
+            if (modelo.IdPersona.Trim() != "" || (from p in _context.Persona where p.Cedula == modelo.IdPersona select p).ToList().Count > 0)
             {
 
                 var persona = (from p in _context.Persona
                                where p.Cedula == modelo.IdPersona
-                               select new Models.ApplicationUser
+                               select new ApplicationUser
                                {
                                    Pais = p.Pais,
                                    NombreCompleto = p.NombreCompleto,
@@ -290,9 +319,8 @@ namespace WebApplication1.Controllers
                 return View("~/Views/Registro/Delete.cshtml", modelo1);
             }
 
-            return View(modelo);
+            return View("Error");
         }
-
 
         [HttpPost]
         public IActionResult Edit(EditarViewModel modelo)
@@ -300,7 +328,7 @@ namespace WebApplication1.Controllers
             if (ModelState.IsValid)
             {
 
-                var persona = (from c in _context.Persona where c.TipoPersonaId == modelo.IdPersona select c).FirstOrDefault();
+                var persona = (from c in _context.Persona where c.Cedula == modelo.IdPersona2 select c).FirstOrDefault();
 
                 persona.NombreCompleto = modelo.Nombre;
                 persona.Genero = modelo.Genero;
@@ -328,9 +356,9 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult Delete(DeleteViewModel modelo)
         {
-            if (modelo.IdPersona != null)
+            if (modelo.IdPersona.Trim() != "")
             {
-                Models.ApplicationUser x = _context.Persona.Single(p => p.Cedula == modelo.IdPersona);
+                ApplicationUser x = _context.Persona.Single(p => p.Cedula == modelo.IdPersona);
 
                 _context.Persona.Remove(x);
 

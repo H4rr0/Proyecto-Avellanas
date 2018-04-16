@@ -11,7 +11,11 @@ namespace WebApplication1.Models.CursosViewModels
 		[Display(Name = "Codigo del Curso")]
 		public string IdCurso { get; set; }
 
-		[Display(Name = "Codigo de Carrera")]
+
+        [Display(Name = "Identificacion del Curso")]
+        public string IdCurso2 { get; set; }
+
+        [Display(Name = "Codigo de Carrera")]
 		public string CarreraId { get; set; }
 
 		[Display(Name = "Nombre del Curso")]
