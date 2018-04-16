@@ -1,0 +1,60 @@
+.body_registro { 
+			background-image: url(https://www.navitasventures.com/wp-content/uploads/2016/06/Material-design-background-514054880_2126x1416.jpeg);
+			background-position: center center;
+			background-repeat:  no-repeat;
+			background-attachment: fixed;
+			background-size:  cover;
+			background-color: #999;
+  
+}
+
+#wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 34px;
+  color: white;
+}
+
+.page-head-image {
+  
+}
+
+label{
+	 font-weight: normal; 
+}
+.page-head-image img {
+  border-radius: 50%;
+}
+
+#form-trabalhe {
+  margin-top: 30px;
+  text-align: left;
+}
+
+
+.input-group-addon {
+  border: 2px solid #CCC ;
+  border-right: 0px ;
+}
+
+.form-group {
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.header_menu{
+
+    position: fixed;
+    height: 15px;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #343a40;
+    color: #fff;
+    margin-bottom: 
+
+}
+

@@ -1,0 +1,65 @@
+﻿@model WebApplication1.Models.Persona_por_tipo.CrearViewModel
+
+
+<body class="body_registro">
+
+    <section class="color_label_registro">
+
+        <div class="container">
+
+            <h3 class="titulos">@ViewBag.Title</h3>
+            <hr>
+        </div>
+
+        <div id="wrapper" class="container">
+
+            <form method="post">
+
+                <fieldset>
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <label class="control-label" asp-for="PersonaSelecionada"></label>
+
+                            <select asp-for="PersonaSelecionada" class="form-control">
+
+                                @foreach (var item in Model.Persona)
+                                {
+
+                                    <option value="@item.Cedula">@item.NombreCompleto</option>
+                                }
+
+                            </select>
+
+                            <span asp-validation-for="Persona"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <label class="control-label" asp-for="TipoPersonaSelecionada"></label>
+
+                            <select asp-for="TipoPersonaSelecionada" class="form-control">
+
+                                @foreach (var item in Model.TipoPersona)
+                                {
+
+                                    <option value="@item.IdTipoPersona">@item.Descripción</option>
+                                }
+
+                            </select>
+
+                        
+                            <span asp-validation-for="TipoPersonaSelecionada"></span>
+                        </div>
+                    </div>
+
+
+
+                </fieldset>
+
+                <button type="submit" class="btn btn-dark btn-lg btn_registrar">Crear <span class="fa fa-save" aria-hidden="true"></span></button>
+            </form>
+        </div>
+    </section>
+</body>

@@ -1,0 +1,12 @@
+C:\Avellanas\Proyecto-Avellanas\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.0\Avellanas.deps.json
+C:\Avellanas\Proyecto-Avellanas\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.0\Avellanas.runtimeconfig.json
+C:\Avellanas\Proyecto-Avellanas\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.0\Avellanas.runtimeconfig.dev.json
+C:\Avellanas\Proyecto-Avellanas\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.0\Avellanas.dll
+C:\Avellanas\Proyecto-Avellanas\WebApplication1\WebApplication1\bin\Debug\netcoreapp2.0\Avellanas.pdb
+C:\Avellanas\Proyecto-Avellanas\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\Avellanas.csprojResolveAssemblyReference.cache
+C:\Avellanas\Proyecto-Avellanas\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\Avellanas.csproj.CoreCompileInputs.cache
+C:\Avellanas\Proyecto-Avellanas\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Avellanas\Proyecto-Avellanas\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\Avellanas.AssemblyInfoInputs.cache
+C:\Avellanas\Proyecto-Avellanas\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\Avellanas.AssemblyInfo.cs
+C:\Avellanas\Proyecto-Avellanas\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\Avellanas.dll
+C:\Avellanas\Proyecto-Avellanas\WebApplication1\WebApplication1\obj\Debug\netcoreapp2.0\Avellanas.pdb
