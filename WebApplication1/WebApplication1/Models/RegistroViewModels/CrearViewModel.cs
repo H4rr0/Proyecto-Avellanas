@@ -61,13 +61,13 @@ namespace WebApplication1.Models.RegistroViewModels
         [StringLength(50)]
         public string IdTipoPersona { get; set; }
 
-        [Display(Name = "Carrera")]
-        public string CarreraSeleccionada { get; set; }
+        //[Display(Name = "Carrera")]
+        //public string CarreraSeleccionada { get; set; }
 
         [Display(Name = "Tipo Persona")]
         public ICollection<TipoPersona> Tipos { get; set; }
 
-        public ICollection<Carreras> Carreras { get; set; }
+        //public ICollection<Carreras> Carreras { get; set; }
 
         [Required]
         public string Genero { get; set; }

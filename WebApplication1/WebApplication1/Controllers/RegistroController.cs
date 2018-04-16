@@ -59,7 +59,7 @@ namespace WebApplication1.Controllers
 
             modelo.Carnet = "2018" + carne_valor;
             modelo.Tipos = tipos;
-            modelo.Carreras = carreras;
+            //modelo.Carreras = carreras;
 
             return View(modelo);
         }
@@ -109,25 +109,25 @@ namespace WebApplication1.Controllers
                         string pass = "1234567qQ";
                         List<Carreras> carrera = new List<Carreras>();
 
-                        if (modelo.IdTipoPersona == "1")
-                        {
+                        //if (modelo.IdTipoPersona == "1")
+                        //{
 
-                            var consulta_carrera = (from car in _context.Carreras where car.IdCarrera == modelo.CarreraSeleccionada select car).FirstOrDefault();
+                        //    //var consulta_carrera = (from car in _context.Carreras where car.IdCarrera == modelo.CarreraSeleccionada select car).FirstOrDefault();
 
-                            carrera.Add(new Carreras
-                            {
-                                IdCarrera = "CAR_EST" + (from seq in _context.Secuencias
-                                                         where seq.Descripcion == "CAR_EST"
-                                                         select seq.Value).FirstOrDefault(),
-                                NombreCarrera = consulta_carrera.NombreCarrera,
-                                IdPersona = modelo.IdPersona
-                            });
+                        //    //carrera.Add(new Carreras
+                        //    //{
+                        //    //    IdCarrera = "CAR_EST" + (from seq in _context.Secuencias
+                        //    //                             where seq.Descripcion == "CAR_EST"
+                        //    //                             select seq.Value).FirstOrDefault(),
+                        //    //    NombreCarrera = consulta_carrera.NombreCarrera,
+                        //    //    IdPersona = modelo.IdPersona
+                        //    //});
 
-                        }
-                        else
-                        {
-                            carrera = null;
-                        }
+                        //}
+                        //else
+                        //{
+                        //    carrera = null;
+                        //}
 
 
                         var user = new ApplicationUser
